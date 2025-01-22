@@ -1,4 +1,7 @@
+using WebApplication1;
+
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddTransient<CustomMiddleware>();  // here I have registered my custom middleware as a Transient service
 var app = builder.Build();                          // once the builder object will Build then we can create the Middlewares
 
 app.MapGet("/", () => "Hello !");
@@ -7,16 +10,15 @@ app.Use(async (HttpContext context, RequestDelegate requestDelegate) =>
 {
     await context.Response.WriteAsync("This is just another middleware");
     await requestDelegate(context);         // this context will be received by the subsequent middleware as an argument
-                                            // this request delegate method is important for the middleware chaining
+    // this request delegate method is important for the middleware chaining
 });
+
+app.UseMiddleware<CustomMiddleware>();             // here I am actually calling that Custom middleware
 
 app.Run(async (HttpContext context) =>
 {
     // context.Response.StatusCode = 200;
     context.Request.Headers.ContentType = "text/plain";
-    // context.Response.Headers.ContentType = "text/plain";
-    // context.Response.Headers["My Key"] = "My Value";
-
     if (context.Request.Method == "Get")
     {
         if (context.Request.Query.ContainsKey("id"))
