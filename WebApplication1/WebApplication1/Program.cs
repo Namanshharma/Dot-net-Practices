@@ -1,19 +1,21 @@
 var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
+var app = builder.Build();                          // once the builder object will Build then we can create the Middlewares
 
 app.MapGet("/", () => "Hello !");
 
 app.Use(async (HttpContext context, RequestDelegate requestDelegate) =>
 {
     await context.Response.WriteAsync("This is just another middleware");
+    await requestDelegate(context);         // this context will be received by the subsequent middleware as an argument
+                                            // this request delegate method is important for the middleware chaining
 });
 
 app.Run(async (HttpContext context) =>
 {
-    context.Response.StatusCode = 200;
+    // context.Response.StatusCode = 200;
     context.Request.Headers.ContentType = "text/plain";
-    context.Response.Headers.ContentType = "text/plain";
-    context.Response.Headers["My Key"] = "My Value";
+    // context.Response.Headers.ContentType = "text/plain";
+    // context.Response.Headers["My Key"] = "My Value";
 
     if (context.Request.Method == "Get")
     {
@@ -25,9 +27,10 @@ app.Run(async (HttpContext context) =>
     await context.Response.WriteAsync("Hello, I have set the status code to 204");
 });
 
-app.Run();
+app.Run();      // This Run Middleware is also called the TERMINATING Middleware
 
 // if we want to set the Reverse proxy server then we can setup that in LaunchSetting.json file. There are 2 profiles in that, first one is for the Kestrel server
 // which is the by default server provided and another server we can configure according to our requirement
 
-// we have some of the middlewares present :- Map , Run 
+// Middleware is a component which assembles into the application pipeline to handle the request and response 
+// we have some of the middlewares present :- app.Map, app.Run , app.Use
