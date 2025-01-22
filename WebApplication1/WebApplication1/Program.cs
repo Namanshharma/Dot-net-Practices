@@ -14,6 +14,8 @@ app.Use(async (HttpContext context, RequestDelegate requestDelegate) =>
 });
 
 app.UseMiddleware<CustomMiddleware>();             // here I am actually calling that Custom middleware
+// sometimes writing this UseMiddleware method and call our CustomMiddleware sometimes becomes lengthy process. So, it's resolution is that we can create THE EXTENSION METHOD.
+app.UseCustomMiddlewareExtensionMethod();
 
 app.Run(async (HttpContext context) =>
 {
@@ -36,3 +38,6 @@ app.Run();      // This Run Middleware is also called the TERMINATING Middleware
 
 // Middleware is a component which assembles into the application pipeline to handle the request and response 
 // we have some of the middlewares present :- app.Map, app.Run , app.Use
+
+// EXTENSION METHODS :- Method and class which includes extensio method must be a static class
+//                   :- Extension method is a method which is injected into an object dynamically 

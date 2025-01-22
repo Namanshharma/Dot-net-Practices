@@ -10,4 +10,13 @@ namespace WebApplication1
             await context.Response.WriteAsync("\n Hi, this is my custom middleware ends     \n");
         }
     }
+
+    // below, I have created the Extension method
+    public static class CustomMiddlewareExtensionMethod
+    {
+        public static IApplicationBuilder UseCustomMiddlewareExtensionMethod(this IApplicationBuilder app)
+        {
+            return app.UseMiddleware<CustomMiddleware>();
+        }
+    }
 }
