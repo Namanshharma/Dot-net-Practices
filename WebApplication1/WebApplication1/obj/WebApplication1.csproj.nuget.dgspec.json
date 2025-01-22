@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Coding material\\Full Stack Web Development\\Back End\\Dot net Practices\\WebApplication1\\WebApplication1\\WebApplication1.csproj": {}
+    "d:\\Coding material\\Full Stack Web Development\\Back End\\Dot net Practices\\WebApplication1\\WebApplication1\\WebApplication1.csproj": {}
   },
   "projects": {
-    "D:\\Coding material\\Full Stack Web Development\\Back End\\Dot net Practices\\WebApplication1\\WebApplication1\\WebApplication1.csproj": {
+    "d:\\Coding material\\Full Stack Web Development\\Back End\\Dot net Practices\\WebApplication1\\WebApplication1\\WebApplication1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Coding material\\Full Stack Web Development\\Back End\\Dot net Practices\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
+        "projectUniqueName": "d:\\Coding material\\Full Stack Web Development\\Back End\\Dot net Practices\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
         "projectName": "WebApplication1",
-        "projectPath": "D:\\Coding material\\Full Stack Web Development\\Back End\\Dot net Practices\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
+        "projectPath": "d:\\Coding material\\Full Stack Web Development\\Back End\\Dot net Practices\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "D:\\Coding material\\Full Stack Web Development\\Back End\\Dot net Practices\\WebApplication1\\WebApplication1\\obj\\",
+        "outputPath": "d:\\Coding material\\Full Stack Web Development\\Back End\\Dot net Practices\\WebApplication1\\WebApplication1\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config"
