@@ -7,10 +7,18 @@ var app = builder.Build();                          // once the builder object w
 app.UseRouting();
 app.UseEndpoints(x =>
 {
-    x.Map("/", async (HttpContext context) => { await context.Response.WriteAsync("This is home endpoint"); });
     // here we can add our endpoints
-    x.Map("map", async (HttpContext context) => { await context.Response.WriteAsync("Hey, you just use Map method"); });
-    x.MapGet("mapGet", async (HttpContext context) => { await context.Response.WriteAsync("Hey, you just use MapGet method"); });
+
+    x.Map("/", async (HttpContext context) => { await context.Response.WriteAsync("This is home endpoint"); });
+    // x.Map("map", async (HttpContext context) => { await context.Response.WriteAsync("Hey, you just use Map method"); });
+    // x.MapGet("mapGet", async (HttpContext context) => { await context.Response.WriteAsync("Hey, you just use MapGet method"); });
+
+    // here is the exmaple of Route parameter
+    // x.Map("routeParameters/{firstRouteParameter}", async context =>
+    // {
+    //     string routeParameter = context.Request.RouteValues["firstRouteParameter"].ToString();
+    //     await context.Response.WriteAsync($"Here is the first route which is having RouteParameter name :- {routeParameter}");
+    // });
 });
 
 // app.MapGet("/", () => "Hello !");
@@ -72,3 +80,6 @@ app.Run();      // This Run Middleware is also called the TERMINATING Middleware
 // ==> app.UseEndpoints(x => { here you can add your endpoints })
 // ==> app.GetEndpoint  <<---- It used to get the name of the endpoint. Also, if we use GetEndpoint middleware before UseRouting then we will receive NULL in that case. But if we use
 //                             GetEndpoint after useRouting then we will get the appropriate name of that endpoint.
+// There is one exmaple of Route parameter as well. Also we can give the DEFAULT ROUTE PARAMETER as well by doing something like :- x.Map("routeParameters/{firstRouteParameter=demo}", context
+// Similar to Default route parameter we also have OPTIONAL ROUTE PARAMETER :- x.Map("routeParameters/{firstRouteParameter?}"   <-- In this case, if user doesn't provide any value to the 
+//                                                                          route parameter then in that case it would be null
