@@ -39,5 +39,9 @@ WebApplication1/WebApplication1/obj/Debug/net9.0/WebApplication1.AssemblyInfo.cs
 WebApplication1/WebApplication1/obj/Debug/net9.0/WebApplication1.AssemblyInfoInputs.cache
 WebApplication1/WebApplication1/obj/Debug/net9.0/WebApplication1.assets.cache
 WebApplication1/WebApplication1/obj/Debug/net9.0/WebApplication1.GeneratedMSBuildEditorConfig.editorconfig
-WebApplication1/WebApplication1/obj
-WebApplication1/WebApplication1/bin
+WebApplication1/WebApplication1/obj/
+WebApplication1/WebApplication1/bin/
+WebApplication1/WebApplication1/obj/Debug/net9.0/WebApplication1.AssemblyInfo.cs
+WebApplication1/WebApplication1/obj/Debug/net9.0/WebApplication1.AssemblyInfoInputs.cache
+WebApplication1/WebApplication1/obj/Debug/net9.0/WebApplication1.assets.cache
+WebApplication1/WebApplication1/obj/Debug/net9.0/WebApplication1.GeneratedMSBuildEditorConfig.editorconfig

@@ -1,25 +1,36 @@
-using WebApplication1;
-
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddTransient<CustomMiddleware>();  // here I have registered my custom middleware as a Transient service
+// builder.Services.AddTransient<HomeController1>();        // if application will become larger then in that case we will not add controller name one by one but instead of that we will use
+builder.Services.AddControllers();                          // this addController extension method and this will automatically picks all of the controllers from application and map here
+// builder.Services.AddTransient<CustomMiddleware>();  // here I have registered my custom middleware as a Transient service
 var app = builder.Build();                          // once the builder object will Build then we can create the Middlewares
 
-app.UseRouting();
-app.UseEndpoints(x =>
-{
-    // here we can add our endpoints
+// app.UseRouting();
+// app.UseEndpoints(x =>
+// {
+//     x.MapControllers();                 // while registering the endpoints we will never register them individually but we will register them by using the extension method
+// });
+// instead of above 2 methods for controller we can simply call in single statement :- app.MapControllers() which internally take care of both of these extension methods
+app.MapControllers();
 
-    x.Map("/", async (HttpContext context) => { await context.Response.WriteAsync("This is home endpoint"); });
-    // x.Map("map", async (HttpContext context) => { await context.Response.WriteAsync("Hey, you just use Map method"); });
-    // x.MapGet("mapGet", async (HttpContext context) => { await context.Response.WriteAsync("Hey, you just use MapGet method"); });
 
-    // here is the exmaple of Route parameter
-    // x.Map("routeParameters/{firstRouteParameter}", async context =>
-    // {
-    //     string routeParameter = context.Request.RouteValues["firstRouteParameter"].ToString();
-    //     await context.Response.WriteAsync($"Here is the first route which is having RouteParameter name :- {routeParameter}");
-    // });
-});
+// app.UseStaticFiles()                             // by adding this we are informing application that from wwwroot folder we will access some static files
+
+// app.UseRouting();
+// app.UseEndpoints(x =>
+// {
+//     // here we can add our endpoints
+
+//     x.Map("/", async (HttpContext context) => { await context.Response.WriteAsync("This is home endpoint"); });
+//     // x.Map("map", async (HttpContext context) => { await context.Response.WriteAsync("Hey, you just use Map method"); });
+//     // x.MapGet("mapGet", async (HttpContext context) => { await context.Response.WriteAsync("Hey, you just use MapGet method"); });
+
+//     // here is the exmaple of Route parameter
+//     // x.Map("routeParameters/{firstRouteParameter}", async context =>
+//     // {
+//     //     string routeParameter = context.Request.RouteValues["firstRouteParameter"].ToString();
+//     //     await context.Response.WriteAsync($"Here is the first route which is having RouteParameter name :- {routeParameter}");
+//     // });
+// });
 
 // app.MapGet("/", () => "Hello !");
 
@@ -48,9 +59,9 @@ app.UseEndpoints(x =>
 //     await context.Response.WriteAsync("Hello, I have set the status code to 204");
 // });
 
-app.Run();      // This Run Middleware is also called the TERMINATING Middleware
+app.Run();      // This Run Middleware is also called the TERMINATING Middleware        // if this RUN method is not present then our server will never run
 
-// if we want to set the Reverse proxy server then we can setup that in LaunchSetting.json file. There are 2 profiles in that, first one is for the Kestrel server
+// if we want to set the REVERSE PROXY SERVER then we can setup that in LaunchSetting.json file. There are 2 profiles in that, first one is for the Kestrel server
 // which is the by default server provided and another server we can configure according to our requirement
 
 // Middleware is a component which assembles into the application pipeline to handle the request and response 
@@ -83,3 +94,14 @@ app.Run();      // This Run Middleware is also called the TERMINATING Middleware
 // There is one exmaple of Route parameter as well. Also we can give the DEFAULT ROUTE PARAMETER as well by doing something like :- x.Map("routeParameters/{firstRouteParameter=demo}", context
 // Similar to Default route parameter we also have OPTIONAL ROUTE PARAMETER :- x.Map("routeParameters/{firstRouteParameter?}"   <-- In this case, if user doesn't provide any value to the 
 //                                                                          route parameter then in that case it would be null
+// In this routing, we also have concept of Contraint :- x.Map("routeParameter/{firstRoute:int?}" <<---- by doing this we are confirming that the optional parameter must have int value
+
+// Next step is Controllers :- After creating the controller we need to do 2 things 
+//  ---->> We need to register the controller class as a service and for this we can use this :- builder.Services.AddTransient<HomeController1>(); but when our application will become larger
+//         then we do not register each controller one by one. So instead of this we wiil use :- builder.Services.AddControllers(); this ADD CONTROLLER EXTENSION METHOD
+//  ---->> 2nd we need to enable Routing before use of controllers and then for the use of Controllers we will register them in app.UseEndpoint() extension method. Also in this we will not
+//         register each and every endpoint one by one but we will use the MAP CONTROLLER EXTENSION METHOD here which automatically picks as of the endpoints. like here is an example for the 
+//         same :- app.UseEndpoints(x => { x.MapControllers(); });
+//  ---->> Also in 2nd step by using app.UseRouting and app.UseEndpoint we can directly use APP.MAPCONTROLLER EXTENSION METHOD which internally calls both of the above mentioned methods
+
+// Next step is Model Bindings :- 
