@@ -104,4 +104,4 @@ app.Run();      // This Run Middleware is also called the TERMINATING Middleware
 //         same :- app.UseEndpoints(x => { x.MapControllers(); });
 //  ---->> Also in 2nd step by using app.UseRouting and app.UseEndpoint we can directly use APP.MAPCONTROLLER EXTENSION METHOD which internally calls both of the above mentioned methods
 
-// Next step is Model Bindings :- 
+// Next step is Model Bindings :- And the information related to the Model binding is present in the HOME CONTROLLER 
