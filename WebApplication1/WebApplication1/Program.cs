@@ -1,8 +1,8 @@
 var builder = WebApplication.CreateBuilder(args);
 // builder.Services.AddTransient<HomeController1>();        // if application will become larger then in that case we will not add controller name one by one but instead of that we will use
 builder.Services.AddControllers();                          // this addController extension method and this will automatically picks all of the controllers from application and map here
-// builder.Services.AddTransient<CustomMiddleware>();  // here I have registered my custom middleware as a Transient service
-var app = builder.Build();                          // once the builder object will Build then we can create the Middlewares
+// builder.Services.AddTransient<CustomMiddleware>();       // here I have registered my custom middleware as a Transient service
+var app = builder.Build();                                  // once the builder object will Build then we can create the Middlewares
 
 // app.UseRouting();
 // app.UseEndpoints(x =>
@@ -10,7 +10,7 @@ var app = builder.Build();                          // once the builder object w
 //     x.MapControllers();                 // while registering the endpoints we will never register them individually but we will register them by using the extension method
 // });
 // instead of above 2 methods for controller we can simply call in single statement :- app.MapControllers() which internally take care of both of these extension methods
-app.MapControllers();
+// app.MapControllers();
 
 
 // app.UseStaticFiles()                             // by adding this we are informing application that from wwwroot folder we will access some static files
@@ -105,3 +105,5 @@ app.Run();      // This Run Middleware is also called the TERMINATING Middleware
 //  ---->> Also in 2nd step by using app.UseRouting and app.UseEndpoint we can directly use APP.MAPCONTROLLER EXTENSION METHOD which internally calls both of the above mentioned methods
 
 // Next step is Model Bindings :- And the information related to the Model binding is present in the HOME CONTROLLER 
+
+// Next step is for Services and Dependency Injection
