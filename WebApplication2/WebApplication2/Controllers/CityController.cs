@@ -4,6 +4,8 @@ using Services;
 
 namespace WebApplication2.Controllers
 {
+    [ApiController]
+    [Route("[controller]")]         // by using this solid brackets and put inside "controller" in that will automatically takes CityController or we can also write ("/CityController")
     public class CityController : ControllerBase
     {
         private readonly CitiesService _citiesService;
@@ -11,7 +13,7 @@ namespace WebApplication2.Controllers
         {
             _citiesService = new CitiesService();
         }
-        [Route("/")]
+        [HttpGet]
         public IEnumerable GetCities()
         {
             return _citiesService.getCities();
