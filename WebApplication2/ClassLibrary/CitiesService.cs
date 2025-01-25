@@ -1,16 +1,20 @@
-﻿namespace Services;
+﻿using System.Dynamic;
+using InterfaceClassLibrary;
 
-public class CitiesService
+namespace Services;
+
+public class CitiesService : ICityServices
 {
     private List<string> cities;
+    private Guid ServiceId { get; set; }
     public CitiesService()
     {
         cities = new List<string> { "Amritsar", "Jalandhar", "Mohali", "Chandigarh", "Panchkula", "Hauz Khaz" };
     }
-    // From the controller prespective :- Create a method which will fetch the data of cities
-    public List<string> GetCities()
+    public (List<string>, Guid) GetCities()
     {
-        return cities;
+        ServiceId = Guid.NewGuid();
+        return (cities, ServiceId);
     }
     public string SetCity(string cityName)
     {

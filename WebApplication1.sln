@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication2", "WebAppli
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary", "WebApplication2\ClassLibrary\ClassLibrary.csproj", "{BB3E8BA9-F92D-4687-A18A-6CE9CE25CCEB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterfaceClassLibrary", "WebApplication2\InterfaceClassLibrary\InterfaceClassLibrary.csproj", "{B35368F9-8B8F-4DE9-A8E0-2FD584ACD288}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{BB3E8BA9-F92D-4687-A18A-6CE9CE25CCEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB3E8BA9-F92D-4687-A18A-6CE9CE25CCEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB3E8BA9-F92D-4687-A18A-6CE9CE25CCEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B35368F9-8B8F-4DE9-A8E0-2FD584ACD288}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B35368F9-8B8F-4DE9-A8E0-2FD584ACD288}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B35368F9-8B8F-4DE9-A8E0-2FD584ACD288}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B35368F9-8B8F-4DE9-A8E0-2FD584ACD288}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -39,5 +45,6 @@ Global
 		{61F7D6A2-A5F0-43CD-A4CA-09DBBF911524} = {4F5CF9E6-7706-44B6-B6D3-FB68025B030E}
 		{B08A0680-ECF6-4284-95F3-AA8315E41626} = {9D929C65-C179-0ED9-7191-9D10DFBAEF71}
 		{BB3E8BA9-F92D-4687-A18A-6CE9CE25CCEB} = {9D929C65-C179-0ED9-7191-9D10DFBAEF71}
+		{B35368F9-8B8F-4DE9-A8E0-2FD584ACD288} = {9D929C65-C179-0ED9-7191-9D10DFBAEF71}
 	EndGlobalSection
 EndGlobal
