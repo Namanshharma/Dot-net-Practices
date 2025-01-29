@@ -272,3 +272,59 @@ WebApplication2/WebApplication2/bin/Debug/net9.0/zh-Hant/Microsoft.CodeAnalysis.
 WebApplication2/WebApplication2/bin/Debug/net9.0/zh-Hant/Microsoft.CodeAnalysis.resources.dll
 WebApplication2/WebApplication2/bin/Debug/net9.0/zh-Hant/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 WebApplication2/WebApplication2/bin/Debug/net9.0/zh-Hant/Microsoft.CodeAnalysis.Workspaces.resources.dll
+CRUD Demo/CRUDTests/obj/CRUDTests.csproj.nuget.dgspec.json
+CRUD Demo/CRUDTests/obj/CRUDTests.csproj.nuget.g.props
+CRUD Demo/CRUDTests/obj/CRUDTests.csproj.nuget.g.targets
+CRUD Demo/CRUDTests/obj/project.assets.json
+CRUD Demo/CRUDTests/obj/project.nuget.cache
+CRUD Demo/CRUDTests/obj/Debug/net9.0/.NETCoreApp,Version=v9.0.AssemblyAttributes.cs
+CRUD Demo/CRUDTests/obj/Debug/net9.0/CRUDTests.AssemblyInfo.cs
+CRUD Demo/CRUDTests/obj/Debug/net9.0/CRUDTests.AssemblyInfoInputs.cache
+CRUD Demo/CRUDTests/obj/Debug/net9.0/CRUDTests.assets.cache
+CRUD Demo/CRUDTests/obj/Debug/net9.0/CRUDTests.csproj.AssemblyReference.cache
+CRUD Demo/CRUDTests/obj/Debug/net9.0/CRUDTests.GeneratedMSBuildEditorConfig.editorconfig
+CRUD Demo/CRUDTests/obj/Debug/net9.0/CRUDTests.GlobalUsings.g.cs
+CRUD Demo/Entities/obj/Entities.csproj.nuget.dgspec.json
+CRUD Demo/Entities/obj/Entities.csproj.nuget.g.props
+CRUD Demo/Entities/obj/Entities.csproj.nuget.g.targets
+CRUD Demo/Entities/obj/project.assets.json
+CRUD Demo/Entities/obj/project.nuget.cache
+CRUD Demo/Entities/obj/Debug/net9.0/.NETCoreApp,Version=v9.0.AssemblyAttributes.cs
+CRUD Demo/Entities/obj/Debug/net9.0/Entities.AssemblyInfo.cs
+CRUD Demo/Entities/obj/Debug/net9.0/Entities.AssemblyInfoInputs.cache
+CRUD Demo/Entities/obj/Debug/net9.0/Entities.assets.cache
+CRUD Demo/Entities/obj/Debug/net9.0/Entities.GeneratedMSBuildEditorConfig.editorconfig
+CRUD Demo/Entities/obj/Debug/net9.0/Entities.GlobalUsings.g.cs
+CRUD Demo/ServiceContracts/obj/project.assets.json
+CRUD Demo/ServiceContracts/obj/project.nuget.cache
+CRUD Demo/ServiceContracts/obj/ServiceContracts.csproj.nuget.dgspec.json
+CRUD Demo/ServiceContracts/obj/ServiceContracts.csproj.nuget.g.props
+CRUD Demo/ServiceContracts/obj/ServiceContracts.csproj.nuget.g.targets
+CRUD Demo/ServiceContracts/obj/Debug/net9.0/.NETCoreApp,Version=v9.0.AssemblyAttributes.cs
+CRUD Demo/ServiceContracts/obj/Debug/net9.0/ServiceContracts.AssemblyInfo.cs
+CRUD Demo/ServiceContracts/obj/Debug/net9.0/ServiceContracts.AssemblyInfoInputs.cache
+CRUD Demo/ServiceContracts/obj/Debug/net9.0/ServiceContracts.assets.cache
+CRUD Demo/ServiceContracts/obj/Debug/net9.0/ServiceContracts.GeneratedMSBuildEditorConfig.editorconfig
+CRUD Demo/ServiceContracts/obj/Debug/net9.0/ServiceContracts.GlobalUsings.g.cs
+CRUD_DEMO/obj/CRUD_DEMO.csproj.nuget.dgspec.json
+CRUD_DEMO/obj/CRUD_DEMO.csproj.nuget.g.props
+CRUD_DEMO/obj/CRUD_DEMO.csproj.nuget.g.targets
+CRUD_DEMO/obj/project.assets.json
+CRUD_DEMO/obj/project.nuget.cache
+CRUD_DEMO/obj/Debug/net9.0/.NETCoreApp,Version=v9.0.AssemblyAttributes.cs
+CRUD_DEMO/obj/Debug/net9.0/CRUD_DEMO.AssemblyInfo.cs
+CRUD_DEMO/obj/Debug/net9.0/CRUD_DEMO.AssemblyInfoInputs.cache
+CRUD_DEMO/obj/Debug/net9.0/CRUD_DEMO.assets.cache
+CRUD_DEMO/obj/Debug/net9.0/CRUD_DEMO.GeneratedMSBuildEditorConfig.editorconfig
+CRUD_DEMO/obj/Debug/net9.0/CRUD_DEMO.GlobalUsings.g.cs
+CRUD Demo/CRUD_DEMO/obj/CRUD_DEMO.csproj.nuget.dgspec.json
+CRUD Demo/CRUD_DEMO/obj/CRUD_DEMO.csproj.nuget.g.props
+CRUD Demo/CRUD_DEMO/obj/CRUD_DEMO.csproj.nuget.g.targets
+CRUD Demo/CRUD_DEMO/obj/project.assets.json
+CRUD Demo/CRUD_DEMO/obj/project.nuget.cache
+CRUD Demo/CRUD_DEMO/obj/Debug/net9.0/.NETCoreApp,Version=v9.0.AssemblyAttributes.cs
+CRUD Demo/CRUD_DEMO/obj/Debug/net9.0/CRUD_DEMO.AssemblyInfo.cs
+CRUD Demo/CRUD_DEMO/obj/Debug/net9.0/CRUD_DEMO.AssemblyInfoInputs.cache
+CRUD Demo/CRUD_DEMO/obj/Debug/net9.0/CRUD_DEMO.assets.cache
+CRUD Demo/CRUD_DEMO/obj/Debug/net9.0/CRUD_DEMO.GeneratedMSBuildEditorConfig.editorconfig
+CRUD Demo/CRUD_DEMO/obj/Debug/net9.0/CRUD_DEMO.GlobalUsings.g.cs
