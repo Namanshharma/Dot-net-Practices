@@ -328,3 +328,18 @@ CRUD Demo/CRUD_DEMO/obj/Debug/net9.0/CRUD_DEMO.AssemblyInfoInputs.cache
 CRUD Demo/CRUD_DEMO/obj/Debug/net9.0/CRUD_DEMO.assets.cache
 CRUD Demo/CRUD_DEMO/obj/Debug/net9.0/CRUD_DEMO.GeneratedMSBuildEditorConfig.editorconfig
 CRUD Demo/CRUD_DEMO/obj/Debug/net9.0/CRUD_DEMO.GlobalUsings.g.cs
+.vscode/launch.json
+CRUD Demo/Services/obj/project.assets.json
+CRUD Demo/Services/obj/project.nuget.cache
+CRUD Demo/Services/obj/Services.csproj.nuget.dgspec.json
+CRUD Demo/Services/obj/Services.csproj.nuget.g.props
+CRUD Demo/Services/obj/Services.csproj.nuget.g.targets
+CRUD Demo/Services/obj/Debug/net9.0/.NETCoreApp,Version=v9.0.AssemblyAttributes.cs
+CRUD Demo/Services/obj/Debug/net9.0/Services.AssemblyInfo.cs
+CRUD Demo/Services/obj/Debug/net9.0/Services.AssemblyInfoInputs.cache
+CRUD Demo/Services/obj/Debug/net9.0/Services.assets.cache
+CRUD Demo/Services/obj/Debug/net9.0/Services.GeneratedMSBuildEditorConfig.editorconfig
+CRUD Demo/Services/obj/Debug/net9.0/Services.GlobalUsings.g.cs
+CRUD Demo/CRUDTests/bin/Debug/net9.0/.msCoverageSourceRootsMapping_CRUDTests
+CRUD Demo/CRUDTests/bin/Debug/net9.0/CoverletSourceRootsMapping_CRUDTests
+.vscode/launch.json
