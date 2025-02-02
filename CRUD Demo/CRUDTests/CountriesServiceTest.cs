@@ -12,8 +12,5 @@ public class CountriesServiceTest
         _countriesService = new CountriesService();
     }
     // When CountryAddRequest is null then it should throws Argument Null Exception
-
     // When country Name is null then it should throw Argument exception
-
-    
 }

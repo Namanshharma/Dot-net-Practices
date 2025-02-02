@@ -1,5 +1,4 @@
 using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
 using Entities;
 using ServiceContracts;
 using ServiceContracts.DTO;
@@ -10,10 +9,20 @@ public class PersonsService : IPersonsService
 {
     public readonly List<Person> _personList;
     public readonly ICountriesService _countriesService;
-    public PersonsService(CountriesService countriesService)
+    public PersonsService(CountriesService countriesService, bool isInitialze = true)
     {
         _personList = new List<Person>();
         _countriesService = countriesService;
+
+        if (isInitialze)
+        {
+            _personList.AddRange(new List<Person>
+            {
+                new Person{PersonId = Guid.Parse("ea1d955a-a2f5-475b-8a48-5dd9c2a61883"), PersonName = "Melinda" , Email = "mdouris0@github.io" , DateOfBirth = DateTime.ParseExact("1995-11-07", "yyyy-MM-dd", null), Gender = "Male" ,Address = "2178 Fair Oaks Park" , ReveiveNewsLetters = false, CountryId = Guid.Parse("15e6d2c4-87ba-4120-a4f2-128739120dca")},
+                new Person{PersonId = Guid.Parse("3b7666cd-f0e5-4a00-8567-c559223c39dd"), PersonName = "Gibb" , Email = "gcrumb1@hubpages.com" , DateOfBirth = DateTime.ParseExact("2014-07-03", "yyyy-MM-dd", null), Gender = "Female" ,Address = "6443 Southridge Lane" , ReveiveNewsLetters = true, CountryId = Guid.Parse("d6e2bff4-2a60-4b65-a3a8-906713109c12")},
+                new Person{PersonId = Guid.Parse("b38ddef5-6930-4b6d-a06b-e2d8c6c70ffe"), PersonName = "Enriqueta" , Email = "ecunniffe2@pen.io" , DateOfBirth = DateTime.ParseExact("1997-08-13", "yyyy-MM-dd", null), Gender = "Female" ,Address = "672 Sachtjen Park" , ReveiveNewsLetters = true, CountryId = Guid.Parse("a4a9fbf9-747f-4cb0-9606-4b2622d1a30a")}
+            });
+        }
     }
     public PersonResponse AddPerson(PersonAddRequest? personAddRequest)
     {
