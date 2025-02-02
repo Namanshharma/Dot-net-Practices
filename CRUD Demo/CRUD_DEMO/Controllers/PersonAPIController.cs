@@ -14,6 +14,7 @@ namespace CRUD_DEMO.Controllers
             _countriesService = countriesService;
             _personsService = personsService;
         }
+        [HttpGet]
         [Route("/")]
         public List<PersonResponse> GetAllPersons()
         {
@@ -26,6 +27,7 @@ namespace CRUD_DEMO.Controllers
                 throw new Exception(ex.Message, ex.InnerException);
             }
         }
+        [HttpPost]
         [Route("[action]")]
         public PersonResponse AddPerson(PersonAddRequest? personAddRequest)
         {
@@ -35,6 +37,45 @@ namespace CRUD_DEMO.Controllers
                     return _personsService.AddPerson(personAddRequest);
                 else
                     return new PersonResponse();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex.InnerException);
+            }
+        }
+        [HttpGet]
+        [Route("[action]")]
+        public PersonResponse GetPersonByPersonId(Guid? PersonId)
+        {
+            try
+            {
+                return _personsService.GetPersonByPersonId(PersonId);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex.InnerException);
+            }
+        }
+        [HttpPost]
+        [Route("[action]")]
+        public PersonResponse UpdatePerson(PersonUpdateRequest? personUpdateRequest)
+        {
+            try
+            {
+                return _personsService.UpdatePerson(personUpdateRequest);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex.InnerException);
+            }
+        }
+        [HttpDelete]
+        [Route("[action]")]
+        public bool DeletePerson(Guid PersonId)
+        {
+            try
+            {
+                return _personsService.DeletePerson(PersonId);
             }
             catch (Exception ex)
             {
