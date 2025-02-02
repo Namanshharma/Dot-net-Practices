@@ -1,7 +1,9 @@
 using System.Reflection;
+using System.Security.Cryptography.X509Certificates;
 using Entities;
 using ServiceContracts;
 using ServiceContracts.DTO;
+using ServiceContracts.DTO.Enums;
 using Services.Helpers;
 namespace Services;
 public class PersonsService : IPersonsService
@@ -42,7 +44,7 @@ public class PersonsService : IPersonsService
         Person? personDetails = _personList.FirstOrDefault(x => x.PersonId == personId);
         return personDetails == null ? throw new Exception() : personDetails.ToPersonResponse();
     }
-    public List<PersonResponse> GetFilteredPerson(string? propertyName, string? searchString)
+    public List<PersonResponse> GetFilteredPerson(string? propertyName, string? searchString)   // TO DO 
     {
         List<PersonResponse> allPersonList = GetAllPersons();
         List<PersonResponse> matchingPerson = allPersonList;
@@ -58,5 +60,63 @@ public class PersonsService : IPersonsService
             // });
         }
         return new List<PersonResponse>();
+    }
+
+    public List<PersonResponse> GetSortedPerson(List<PersonResponse> allPersons, string sortBy, SortOrderOptions sortOrder)
+    {
+        if (string.IsNullOrEmpty(sortBy))
+            return allPersons;
+
+        List<PersonResponse> sortedPersons = (sortBy, sortOrder) switch
+        {
+            (nameof(PersonResponse.PersonName), SortOrderOptions.ASC) => allPersons.OrderBy(x => x.PersonName, StringComparer.OrdinalIgnoreCase).ToList(),
+            (nameof(PersonResponse.PersonName), SortOrderOptions.DESC) => allPersons.OrderByDescending(x => x.PersonName, StringComparer.OrdinalIgnoreCase).ToList(),
+            (nameof(PersonResponse.Email), SortOrderOptions.ASC) => allPersons.OrderBy(x => x.Email, StringComparer.OrdinalIgnoreCase).ToList(),
+            (nameof(PersonResponse.Email), SortOrderOptions.DESC) => allPersons.OrderByDescending(x => x.Email, StringComparer.OrdinalIgnoreCase).ToList(),
+            (nameof(PersonResponse.DateOfBirth), SortOrderOptions.ASC) => allPersons.OrderBy(x => x.DateOfBirth).ToList(),
+            (nameof(PersonResponse.DateOfBirth), SortOrderOptions.DESC) => allPersons.OrderByDescending(x => x.DateOfBirth).ToList(),
+            (nameof(PersonResponse.Age), SortOrderOptions.ASC) => allPersons.OrderBy(x => x.Age).ToList(),
+            (nameof(PersonResponse.Age), SortOrderOptions.DESC) => allPersons.OrderByDescending(x => x.Age).ToList(),
+            (nameof(PersonResponse.Gender), SortOrderOptions.ASC) => allPersons.OrderBy(x => x.Gender).ToList(),
+            (nameof(PersonResponse.Gender), SortOrderOptions.DESC) => allPersons.OrderByDescending(x => x.Gender).ToList(),
+            (nameof(PersonResponse.Country), SortOrderOptions.ASC) => allPersons.OrderBy(x => x.Country, StringComparer.OrdinalIgnoreCase).ToList(),
+            (nameof(PersonResponse.Country), SortOrderOptions.DESC) => allPersons.OrderByDescending(x => x.Country, StringComparer.OrdinalIgnoreCase).ToList(),
+            (nameof(PersonResponse.Address), SortOrderOptions.ASC) => allPersons.OrderBy(x => x.Address, StringComparer.OrdinalIgnoreCase).ToList(),
+            (nameof(PersonResponse.Address), SortOrderOptions.DESC) => allPersons.OrderByDescending(x => x.Address, StringComparer.OrdinalIgnoreCase).ToList(),
+            (nameof(PersonResponse.ReveiveNewsLetters), SortOrderOptions.ASC) => allPersons.OrderBy(x => x.ReveiveNewsLetters).ToList(),
+            (nameof(PersonResponse.ReveiveNewsLetters), SortOrderOptions.DESC) => allPersons.OrderByDescending(x => x.ReveiveNewsLetters).ToList(),
+            _ => allPersons
+        };
+        return sortedPersons;
+    }
+    public PersonResponse UpdatePerson(PersonUpdateRequest? personUpdateRequest)
+    {
+        if (personUpdateRequest == null) throw new ArgumentException(nameof(Person));
+        ValidationHelper.ModelValidation(personUpdateRequest);
+        Person? matchingPerson = _personList.FirstOrDefault(x => x.PersonId == personUpdateRequest.PersonId);
+        if (matchingPerson == null)
+        {
+            throw new ArgumentException("Give person ID doesn't match");
+        }
+
+        matchingPerson.PersonName = personUpdateRequest.PersonName;
+        matchingPerson.Address = personUpdateRequest.Address;
+        matchingPerson.DateOfBirth = personUpdateRequest.DateOfBirth;
+        matchingPerson.Email = personUpdateRequest.Email;
+        matchingPerson.Gender = personUpdateRequest.Gender.ToString();
+        matchingPerson.CountryId = personUpdateRequest.CountryId;
+        matchingPerson.ReveiveNewsLetters = personUpdateRequest.ReveiveNewsLetters;
+
+        return matchingPerson.ToPersonResponse();
+    }
+
+    public bool DeletePerson(Guid personId)
+    {
+        if (string.IsNullOrEmpty(personId.ToString())) throw new ArgumentNullException("Person ID can not be empty");
+
+        Person? matchedPerson = _personList.FirstOrDefault(x => x.PersonId == personId);
+        if (matchedPerson == null) return false;
+        _personList.RemoveAll(temp => temp.PersonId == matchedPerson.PersonId);
+        return true;
     }
 }
