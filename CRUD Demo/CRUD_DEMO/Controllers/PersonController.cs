@@ -11,12 +11,18 @@ namespace CRUD_DEMO.Controllers
         {
             _countriesService = countriesService; _personsService = personsService;
         }
-        [Route("person/index")]
-        [Route("/")]
+        // [Route("person/index")]
+        // [Route("/")]
         public ActionResult Index()
         {
             List<PersonResponse> persons = _personsService.GetAllPersons();
             return View(persons);
+        }
+        // [Route("person/create")]
+        // [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
         }
     }
 }

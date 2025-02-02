@@ -1,9 +1,7 @@
 ﻿using Entities;
 using ServiceContracts;
 using ServiceContracts.DTO;
-
 namespace Services;
-
 public class CountriesService : ICountriesService
 {
     private readonly List<Country> _countries;

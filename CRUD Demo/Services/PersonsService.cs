@@ -9,7 +9,7 @@ public class PersonsService : IPersonsService
 {
     public readonly List<Person> _personList;
     public readonly ICountriesService _countriesService;
-    public PersonsService(CountriesService countriesService, bool isInitialze = true)
+    public PersonsService(ICountriesService countriesService, bool isInitialze = true)
     {
         _personList = new List<Person>();
         _countriesService = countriesService;

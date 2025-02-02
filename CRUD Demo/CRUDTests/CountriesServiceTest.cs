@@ -7,9 +7,9 @@ public class CountriesServiceTest
 {
     public readonly ICountriesService? _countriesService;
 
-    public CountriesServiceTest()
+    public CountriesServiceTest(ICountriesService countriesService)
     {
-        _countriesService = new CountriesService();
+        _countriesService = countriesService;
     }
     // When CountryAddRequest is null then it should throws Argument Null Exception
     // When country Name is null then it should throw Argument exception
