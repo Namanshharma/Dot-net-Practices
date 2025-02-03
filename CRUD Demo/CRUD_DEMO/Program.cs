@@ -1,3 +1,5 @@
+using Entities;
+using Microsoft.EntityFrameworkCore;
 using ServiceContracts;
 using Services;
 
@@ -5,8 +7,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddControllers();
-builder.Services.AddSingleton<IPersonsService, PersonsService>();
-builder.Services.AddSingleton<ICountriesService, CountriesService>();
+builder.Services.AddScoped<IPersonsService, PersonsService>();
+builder.Services.AddScoped<ICountriesService, CountriesService>();
+builder.Services.AddDbContext<DatabaseDbContext>(x =>
+{
+    x.UseSqlServer();   // specifing that in this we are using SQL server
+});                     // by using this we are registering our DbContext ( Database ) in IOC container 
+
 
 var app = builder.Build();
 
