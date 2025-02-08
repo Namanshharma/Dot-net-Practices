@@ -1,4 +1,5 @@
 using System.Text.Json;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 namespace Entities;
 public class CRUDDbContext : DbContext
@@ -35,6 +36,21 @@ public class CRUDDbContext : DbContext
     public List<Person> sp_GetAllPersons()
     {
         return Persons.FromSqlRaw("Execute dbo.GetAllPersons").ToList();
+    }
+    public int sp_AddPerson(Person person)
+    {
+        SqlParameter[] sqlParameters = new SqlParameter[]{
+            new SqlParameter("@PersonId", person.PersonId),
+            new SqlParameter("@PersonName",person.PersonName),
+            new SqlParameter("@Email",person.Email),
+            new SqlParameter("@DateOfBirth",person.DateOfBirth),
+            new SqlParameter("@Gender",person.Gender),
+            new SqlParameter("@CountryId",person.CountryId),
+            new SqlParameter("@Address",person.Address),
+            new SqlParameter("@ReveiveNewsLetters",person.ReveiveNewsLetters)
+        };
+        string sp = @"Exec dbo.AddPerson @PersonId, @PersonName, @Email, @DateofBirth, @Gender, @CountryId, @Address, @ReveiveNewsLetters,";
+        return Database.ExecuteSqlRaw($"{sp} {sqlParameters}");
     }
 }
 

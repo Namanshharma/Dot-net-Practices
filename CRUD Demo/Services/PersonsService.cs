@@ -22,12 +22,20 @@ public class PersonsService : IPersonsService
 
             Person person = personAddRequest.ToPerson();
             person.PersonId = Guid.NewGuid();
-            _db.Persons.Add(person);
-            _db.SaveChanges();
 
-            PersonResponse personResponse = person.ToPersonResponse();
-            personResponse.Country = _countriesService?.GetCountryByCountryId(person.CountryId)?.CountryName;
-            return personResponse;
+            // _db.Persons.Add(person);
+            // _db.SaveChanges();
+
+            int count = _db.sp_AddPerson(person);       // when we want to add the data by using SP
+
+            if (count > 0)
+            {
+                PersonResponse personResponse = person.ToPersonResponse();
+                personResponse.Country = _countriesService?.GetCountryByCountryId(person.CountryId)?.CountryName;
+                return personResponse;
+            }
+            else
+                return new PersonResponse();
         }
         else
             return new PersonResponse();
