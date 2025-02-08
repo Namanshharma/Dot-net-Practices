@@ -32,6 +32,10 @@ public class CRUDDbContext : DbContext
             }
         }
     }
+    public List<Person> sp_GetAllPersons()
+    {
+        return Persons.FromSqlRaw("Execute dbo.GetAllPersons").ToList();
+    }
 }
 
 // Seed Data :- It adds initial data ( initial rows ) in tables, when the database is newly created

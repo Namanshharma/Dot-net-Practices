@@ -7,7 +7,6 @@ using Services.Helpers;
 namespace Services;
 public class PersonsService : IPersonsService
 {
-    // public readonly List<Person> _personList;
     public readonly CRUDDbContext _db;
     public readonly ICountriesService _countriesService;
     public PersonsService(ICountriesService countriesService, CRUDDbContext databaseDbContext)
@@ -17,17 +16,15 @@ public class PersonsService : IPersonsService
     }
     public PersonResponse AddPerson(PersonAddRequest? personAddRequest)
     {
-        // if (personAddRequest == null) { throw new ArgumentNullException(nameof(personAddRequest)); }
-        // if (string.IsNullOrEmpty(personAddRequest.PersonName)) { throw new ArgumentException("Person Name cannot be empty"); }
-        // INSTEAD OF THIS IF CONDIIONT VALIDATION :- we will use Data Model validaitons by using Validation Context
         if (personAddRequest != null)
         {
             ValidationHelper.ModelValidation(personAddRequest);
+
             Person person = personAddRequest.ToPerson();
             person.PersonId = Guid.NewGuid();
-            // _personList.Add(person);
             _db.Persons.Add(person);
             _db.SaveChanges();
+
             PersonResponse personResponse = person.ToPersonResponse();
             personResponse.Country = _countriesService?.GetCountryByCountryId(person.CountryId)?.CountryName;
             return personResponse;
@@ -37,21 +34,17 @@ public class PersonsService : IPersonsService
     }
     public List<PersonResponse> GetAllPersons()
     {
-        // return _personList.Select(x => x.ToPersonResponse()).ToList();
-        // return _db.Persons.Select(x => x.ToPersonResponse()).ToList();       // in this case we will encountered one error that cannot evaluate the expression in linq
-
-
-        // List<Person> personList = _db.Persons.Select(x => x).ToList();
+        // List<Person> personList = _db.Persons.Select(x => x).ToList();  
         // return personList.Select(x => x.ToPersonResponse()).ToList();
 
         // another way to implement this 
-        return _db.Persons.ToList().Select(x => x.ToPersonResponse()).ToList();         // more optimized way
+        // return _db.Persons.ToList().Select(x => x.ToPersonResponse()).ToList();         // more optimized way is to convert first into array by using list() and then convert each row
+        return _db.sp_GetAllPersons().Select(x => x.ToPersonResponse()).ToList();           // same process to fetch the data from SP
     }
     public PersonResponse GetPersonByPersonId(Guid? personId)
     {
         if (string.IsNullOrEmpty(personId.ToString()))
             throw new ArgumentNullException("Must provide Person ID");
-        // Person? personDetails = _personList.FirstOrDefault(x => x.PersonId == personId);
         Person? personDetails = _db.Persons.FirstOrDefault(x => x.PersonId == personId);
         return personDetails == null ? throw new Exception() : personDetails.ToPersonResponse();
     }
@@ -104,12 +97,10 @@ public class PersonsService : IPersonsService
     {
         if (personUpdateRequest == null) throw new ArgumentException(nameof(Person));
         ValidationHelper.ModelValidation(personUpdateRequest);
-        // Person? matchingPerson = _personList.FirstOrDefault(x => x.PersonId == personUpdateRequest.PersonId);
+
         Person? matchingPerson = _db.Persons.FirstOrDefault(x => x.PersonId == personUpdateRequest.PersonId);
         if (matchingPerson == null)
-        {
             throw new ArgumentException("Give person ID doesn't match");
-        }
 
         matchingPerson.PersonName = personUpdateRequest.PersonName;
         matchingPerson.Address = personUpdateRequest.Address;
@@ -118,8 +109,8 @@ public class PersonsService : IPersonsService
         matchingPerson.Gender = personUpdateRequest.Gender.ToString();
         matchingPerson.CountryId = personUpdateRequest.CountryId;
         matchingPerson.ReveiveNewsLetters = personUpdateRequest.ReveiveNewsLetters;
-
         _db.SaveChanges();
+
         return matchingPerson.ToPersonResponse();
     }
 
@@ -127,12 +118,12 @@ public class PersonsService : IPersonsService
     {
         if (string.IsNullOrEmpty(personId.ToString())) throw new ArgumentNullException("Person ID can not be empty");
 
-        // Person? matchedPerson = _personList.FirstOrDefault(x => x.PersonId == personId);
         Person? matchedPerson = _db.Persons.FirstOrDefault(x => x.PersonId == personId);
         if (matchedPerson == null) return false;
-        // _personList.RemoveAll(temp => temp.PersonId == matchedPerson.PersonId);
+
         _db.Persons.Remove(_db.Persons.First(temp => temp.PersonId == matchedPerson.PersonId));
         _db.SaveChanges();
+
         return true;
     }
 }

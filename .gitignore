@@ -554,3 +554,5 @@ CRUD Demo/CRUD_DEMO/obj/Entities.EntityFrameworkCore.targets
 CRUD Demo/Entities/obj/Debug/net9.0/Entities.csproj.AssemblyReference.cache
 CRUD Demo/Entities/obj/Debug/net9.0/Entities.csproj.AssemblyReference.cache
 CRUD Demo/Entities/obj/Debug/net9.0/Entities.csproj.AssemblyReference.cache
+CRUD Demo/obj/Enitites.EntityFrameworkCore.targets
+CRUD Demo/obj/Entites.EntityFrameworkCore.targets
