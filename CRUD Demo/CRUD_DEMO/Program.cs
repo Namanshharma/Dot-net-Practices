@@ -9,11 +9,10 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddControllers();
 builder.Services.AddScoped<IPersonsService, PersonsService>();
 builder.Services.AddScoped<ICountriesService, CountriesService>();
-builder.Services.AddDbContext<DatabaseDbContext>(x =>
+builder.Services.AddDbContext<CRUDDbContext>(x =>
 {
-    x.UseSqlServer();   // specifing that in this we are using SQL server
-});                     // by using this we are registering our DbContext ( Database ) in IOC container 
-
+    x.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));   // specifing that in this we are using SQL server
+});                // by using this we are registering our DbContext ( Database ) in IOC container 
 
 var app = builder.Build();
 

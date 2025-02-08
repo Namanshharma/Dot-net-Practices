@@ -7,22 +7,13 @@ using Services.Helpers;
 namespace Services;
 public class PersonsService : IPersonsService
 {
-    public readonly List<Person> _personList;
+    // public readonly List<Person> _personList;
+    public readonly CRUDDbContext _db;
     public readonly ICountriesService _countriesService;
-    public PersonsService(ICountriesService countriesService, bool isInitialze = true)
+    public PersonsService(ICountriesService countriesService, CRUDDbContext databaseDbContext)
     {
-        _personList = new List<Person>();
+        _db = databaseDbContext;
         _countriesService = countriesService;
-
-        if (isInitialze)
-        {
-            _personList.AddRange(new List<Person>
-            {
-                new Person{PersonId = Guid.Parse("ea1d955a-a2f5-475b-8a48-5dd9c2a61883"), PersonName = "Melinda" , Email = "mdouris0@github.io" , DateOfBirth = DateTime.ParseExact("1995-11-07", "yyyy-MM-dd", null), Gender = "Male" ,Address = "2178 Fair Oaks Park" , ReveiveNewsLetters = false, CountryId = Guid.Parse("15e6d2c4-87ba-4120-a4f2-128739120dca")},
-                new Person{PersonId = Guid.Parse("3b7666cd-f0e5-4a00-8567-c559223c39dd"), PersonName = "Gibb" , Email = "gcrumb1@hubpages.com" , DateOfBirth = DateTime.ParseExact("2014-07-03", "yyyy-MM-dd", null), Gender = "Female" ,Address = "6443 Southridge Lane" , ReveiveNewsLetters = true, CountryId = Guid.Parse("d6e2bff4-2a60-4b65-a3a8-906713109c12")},
-                new Person{PersonId = Guid.Parse("b38ddef5-6930-4b6d-a06b-e2d8c6c70ffe"), PersonName = "Enriqueta" , Email = "ecunniffe2@pen.io" , DateOfBirth = DateTime.ParseExact("1997-08-13", "yyyy-MM-dd", null), Gender = "Female" ,Address = "672 Sachtjen Park" , ReveiveNewsLetters = true, CountryId = Guid.Parse("a4a9fbf9-747f-4cb0-9606-4b2622d1a30a")}
-            });
-        }
     }
     public PersonResponse AddPerson(PersonAddRequest? personAddRequest)
     {
@@ -34,7 +25,9 @@ public class PersonsService : IPersonsService
             ValidationHelper.ModelValidation(personAddRequest);
             Person person = personAddRequest.ToPerson();
             person.PersonId = Guid.NewGuid();
-            _personList.Add(person);
+            // _personList.Add(person);
+            _db.Persons.Add(person);
+            _db.SaveChanges();
             PersonResponse personResponse = person.ToPersonResponse();
             personResponse.Country = _countriesService?.GetCountryByCountryId(person.CountryId)?.CountryName;
             return personResponse;
@@ -44,13 +37,22 @@ public class PersonsService : IPersonsService
     }
     public List<PersonResponse> GetAllPersons()
     {
-        return _personList.Select(x => x.ToPersonResponse()).ToList();
+        // return _personList.Select(x => x.ToPersonResponse()).ToList();
+        // return _db.Persons.Select(x => x.ToPersonResponse()).ToList();       // in this case we will encountered one error that cannot evaluate the expression in linq
+
+
+        // List<Person> personList = _db.Persons.Select(x => x).ToList();
+        // return personList.Select(x => x.ToPersonResponse()).ToList();
+
+        // another way to implement this 
+        return _db.Persons.ToList().Select(x => x.ToPersonResponse()).ToList();         // more optimized way
     }
     public PersonResponse GetPersonByPersonId(Guid? personId)
     {
         if (string.IsNullOrEmpty(personId.ToString()))
             throw new ArgumentNullException("Must provide Person ID");
-        Person? personDetails = _personList.FirstOrDefault(x => x.PersonId == personId);
+        // Person? personDetails = _personList.FirstOrDefault(x => x.PersonId == personId);
+        Person? personDetails = _db.Persons.FirstOrDefault(x => x.PersonId == personId);
         return personDetails == null ? throw new Exception() : personDetails.ToPersonResponse();
     }
     public List<PersonResponse> GetFilteredPerson(string? propertyName, string? searchString)   // TO DO 
@@ -102,7 +104,8 @@ public class PersonsService : IPersonsService
     {
         if (personUpdateRequest == null) throw new ArgumentException(nameof(Person));
         ValidationHelper.ModelValidation(personUpdateRequest);
-        Person? matchingPerson = _personList.FirstOrDefault(x => x.PersonId == personUpdateRequest.PersonId);
+        // Person? matchingPerson = _personList.FirstOrDefault(x => x.PersonId == personUpdateRequest.PersonId);
+        Person? matchingPerson = _db.Persons.FirstOrDefault(x => x.PersonId == personUpdateRequest.PersonId);
         if (matchingPerson == null)
         {
             throw new ArgumentException("Give person ID doesn't match");
@@ -116,6 +119,7 @@ public class PersonsService : IPersonsService
         matchingPerson.CountryId = personUpdateRequest.CountryId;
         matchingPerson.ReveiveNewsLetters = personUpdateRequest.ReveiveNewsLetters;
 
+        _db.SaveChanges();
         return matchingPerson.ToPersonResponse();
     }
 
@@ -123,9 +127,12 @@ public class PersonsService : IPersonsService
     {
         if (string.IsNullOrEmpty(personId.ToString())) throw new ArgumentNullException("Person ID can not be empty");
 
-        Person? matchedPerson = _personList.FirstOrDefault(x => x.PersonId == personId);
+        // Person? matchedPerson = _personList.FirstOrDefault(x => x.PersonId == personId);
+        Person? matchedPerson = _db.Persons.FirstOrDefault(x => x.PersonId == personId);
         if (matchedPerson == null) return false;
-        _personList.RemoveAll(temp => temp.PersonId == matchedPerson.PersonId);
+        // _personList.RemoveAll(temp => temp.PersonId == matchedPerson.PersonId);
+        _db.Persons.Remove(_db.Persons.First(temp => temp.PersonId == matchedPerson.PersonId));
+        _db.SaveChanges();
         return true;
     }
 }
