@@ -23,16 +23,15 @@ public class PersonsService : IPersonsService
 
             Person person = personAddRequest.ToPerson();
             person.PersonId = Guid.NewGuid();
-
             // _db.Persons.Add(person);
             // _db.SaveChanges();
-
             int count = await _db.sp_AddPerson(person);       // when we want to add the data by using SP
-
             if (count > 0)
             {
                 PersonResponse personResponse = person.ToPersonResponse();
-                personResponse.Country = _countriesService?.GetCountryByCountryId(person.CountryId)?.CountryName;
+                CountryResponse? countryResponse = await _countriesService?.GetCountryByCountryId(person.CountryId);
+                if (countryResponse != null)
+                    personResponse.Country = countryResponse.CountryName;
                 return personResponse;
             }
             else
@@ -48,7 +47,8 @@ public class PersonsService : IPersonsService
 
         // another way to implement this 
         // return _db.Persons.ToList().Select(x => x.ToPersonResponse()).ToList();         // more optimized way is to convert first into array by using list() and then convert each row
-        return await _db.sp_GetAllPersons().Select(x => x.ToPersonResponse()).ToList();           // same process to fetch the data from SP
+        List<Person> persons = await _db.sp_GetAllPersons();
+        return persons.Select(x => x.ToPersonResponse()).ToList();
     }
     public async Task<PersonResponse> GetPersonByPersonId(Guid? personId)
     {
@@ -74,7 +74,6 @@ public class PersonsService : IPersonsService
         }
         return new List<PersonResponse>();
     }
-
     public async Task<List<PersonResponse>> GetSortedPerson(List<PersonResponse> allPersons, string sortBy, SortOrderOptions sortOrder)
     {
         if (string.IsNullOrEmpty(sortBy))
@@ -122,7 +121,6 @@ public class PersonsService : IPersonsService
 
         return matchingPerson.ToPersonResponse();
     }
-
     public async Task<bool> DeletePerson(Guid personId)
     {
         if (string.IsNullOrEmpty(personId.ToString())) throw new ArgumentNullException("Person ID can not be empty");
