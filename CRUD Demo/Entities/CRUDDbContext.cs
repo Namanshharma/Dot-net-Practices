@@ -32,12 +32,16 @@ public class CRUDDbContext : DbContext
                 modelBuilder.Entity<Person>().HasData(person);
             }
         }
+
+        // fluent API           :- This HasDefault value is like a Constraint
+        modelBuilder.Entity<Country>().Property(x => x.CreatedDate).HasColumnName("CreatedDate").HasColumnType("DateTime").HasDefaultValue(DateTime.Now.ToString());
+        // modelBuilder.Entity<Country>().HasIndex(x => x.CountryId).IsUnique();           // for Primary key constraint
     }
-    public List<Person> sp_GetAllPersons()
+    public async Task<List<Person>> sp_GetAllPersons()
     {
-        return Persons.FromSqlRaw("Execute dbo.GetAllPersons").ToList();
+        return await Persons.FromSqlRaw("Execute dbo.GetAllPersons").ToListAsync();
     }
-    public int sp_AddPerson(Person person)
+    public async Task<int> sp_AddPerson(Person person)
     {
         SqlParameter[] sqlParameters = new SqlParameter[]{
             new SqlParameter("@PersonId", person.PersonId),

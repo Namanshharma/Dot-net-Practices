@@ -2,7 +2,7 @@ using ServiceContracts.DTO;
 namespace ServiceContracts;
 public interface ICountriesService
 {
-    CountryResponse AddCountry(CountryAddRequest? countryAddRequest);
-    List<CountryResponse> GetAllCountries();
-    CountryResponse? GetCountryByCountryId(Guid? countryId);
+    Task<CountryResponse> AddCountry(CountryAddRequest? countryAddRequest);
+    Task<List<CountryResponse>> GetAllCountries();
+    Task<CountryResponse>? GetCountryByCountryId(Guid? countryId);
 }

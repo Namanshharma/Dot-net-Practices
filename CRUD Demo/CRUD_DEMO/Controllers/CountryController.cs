@@ -15,9 +15,9 @@ namespace CRUD_DEMO.Controllers
         }
         [HttpGet]
         [Route("[action]")]
-        public List<CountryResponse> GetAllCountries()
+        public async Task<List<CountryResponse>> GetAllCountries()
         {
-            try { return _countriesService.GetAllCountries(); }
+            try { return await _countriesService.GetAllCountries(); }
             catch (Exception ex) { throw new Exception(ex.Message, ex.InnerException); }
         }
     }

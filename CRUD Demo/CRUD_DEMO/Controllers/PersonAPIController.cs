@@ -16,11 +16,11 @@ namespace CRUD_DEMO.Controllers
         }
         [HttpGet]
         [Route("/")]
-        public List<PersonResponse> GetAllPersons()
+        public async Task<List<PersonResponse>> GetAllPersons()
         {
             try
             {
-                return _personsService.GetAllPersons();
+                return await _personsService.GetAllPersons();
             }
             catch (Exception ex)
             {
@@ -29,12 +29,12 @@ namespace CRUD_DEMO.Controllers
         }
         [HttpPost]
         [Route("[action]")]
-        public PersonResponse AddPerson(PersonAddRequest? personAddRequest)
+        public async Task<PersonResponse> AddPerson(PersonAddRequest? personAddRequest)
         {
             try
             {
                 if (ModelState.IsValid)
-                    return _personsService.AddPerson(personAddRequest);
+                    return await _personsService.AddPerson(personAddRequest);
                 else
                     return new PersonResponse();
             }
@@ -45,11 +45,11 @@ namespace CRUD_DEMO.Controllers
         }
         [HttpGet]
         [Route("[action]")]
-        public PersonResponse GetPersonByPersonId(Guid? PersonId)
+        public async Task<PersonResponse> GetPersonByPersonId(Guid? PersonId)
         {
             try
             {
-                return _personsService.GetPersonByPersonId(PersonId);
+                return await _personsService.GetPersonByPersonId(PersonId);
             }
             catch (Exception ex)
             {
@@ -58,11 +58,11 @@ namespace CRUD_DEMO.Controllers
         }
         [HttpPost]
         [Route("[action]")]
-        public PersonResponse UpdatePerson(PersonUpdateRequest? personUpdateRequest)
+        public async Task<PersonResponse> UpdatePerson(PersonUpdateRequest? personUpdateRequest)
         {
             try
             {
-                return _personsService.UpdatePerson(personUpdateRequest);
+                return await _personsService.UpdatePerson(personUpdateRequest);
             }
             catch (Exception ex)
             {
@@ -71,11 +71,11 @@ namespace CRUD_DEMO.Controllers
         }
         [HttpDelete]
         [Route("[action]")]
-        public bool DeletePerson(Guid PersonId)
+        public async Task<bool> DeletePerson(Guid PersonId)
         {
             try
             {
-                return _personsService.DeletePerson(PersonId);
+                return await _personsService.DeletePerson(PersonId);
             }
             catch (Exception ex)
             {
