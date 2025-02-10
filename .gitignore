@@ -589,3 +589,27 @@ ConsoleApp/obj/Debug/net9.0/ConsoleApp.pdb
 ConsoleApp/obj/Debug/net9.0/ConsoleApp.sourcelink.json
 ConsoleApp/obj/Debug/net9.0/ref/ConsoleApp.dll
 ConsoleApp/obj/Debug/net9.0/refint/ConsoleApp.dll
+CRUD Demo/Repositories/obj/project.assets.json
+CRUD Demo/Repositories/obj/project.nuget.cache
+CRUD Demo/Repositories/obj/Repositories.csproj.nuget.dgspec.json
+CRUD Demo/Repositories/obj/Repositories.csproj.nuget.g.props
+CRUD Demo/Repositories/obj/Repositories.csproj.nuget.g.targets
+CRUD Demo/Repositories/obj/Debug/net9.0/.NETCoreApp,Version=v9.0.AssemblyAttributes.cs
+CRUD Demo/Repositories/obj/Debug/net9.0/Repositories.AssemblyInfo.cs
+CRUD Demo/Repositories/obj/Debug/net9.0/Repositories.AssemblyInfoInputs.cache
+CRUD Demo/Repositories/obj/Debug/net9.0/Repositories.assets.cache
+CRUD Demo/Repositories/obj/Debug/net9.0/Repositories.csproj.AssemblyReference.cache
+CRUD Demo/Repositories/obj/Debug/net9.0/Repositories.GeneratedMSBuildEditorConfig.editorconfig
+CRUD Demo/Repositories/obj/Debug/net9.0/Repositories.GlobalUsings.g.cs
+CRUD Demo/RepositoryContracts/obj/project.assets.json
+CRUD Demo/RepositoryContracts/obj/project.nuget.cache
+CRUD Demo/RepositoryContracts/obj/RepositoryContracts.csproj.nuget.dgspec.json
+CRUD Demo/RepositoryContracts/obj/RepositoryContracts.csproj.nuget.g.props
+CRUD Demo/RepositoryContracts/obj/RepositoryContracts.csproj.nuget.g.targets
+CRUD Demo/RepositoryContracts/obj/Debug/net9.0/.NETCoreApp,Version=v9.0.AssemblyAttributes.cs
+CRUD Demo/RepositoryContracts/obj/Debug/net9.0/RepositoryContracts.AssemblyInfo.cs
+CRUD Demo/RepositoryContracts/obj/Debug/net9.0/RepositoryContracts.AssemblyInfoInputs.cache
+CRUD Demo/RepositoryContracts/obj/Debug/net9.0/RepositoryContracts.assets.cache
+CRUD Demo/RepositoryContracts/obj/Debug/net9.0/RepositoryContracts.csproj.AssemblyReference.cache
+CRUD Demo/RepositoryContracts/obj/Debug/net9.0/RepositoryContracts.GeneratedMSBuildEditorConfig.editorconfig
+CRUD Demo/RepositoryContracts/obj/Debug/net9.0/RepositoryContracts.GlobalUsings.g.cs
