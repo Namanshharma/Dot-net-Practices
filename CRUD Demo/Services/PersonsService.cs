@@ -1,6 +1,7 @@
 using System.Reflection;
 using Entities;
 using Microsoft.EntityFrameworkCore;
+using RepositoryContracts;
 using ServiceContracts;
 using ServiceContracts.DTO;
 using ServiceContracts.DTO.Enums;
@@ -8,13 +9,8 @@ using Services.Helpers;
 namespace Services;
 public class PersonsService : IPersonsService
 {
-    public readonly CRUDDbContext _db;
-    public readonly ICountriesService _countriesService;
-    public PersonsService(ICountriesService countriesService, CRUDDbContext databaseDbContext)
-    {
-        _db = databaseDbContext;
-        _countriesService = countriesService;
-    }
+    public readonly IPersonsRepository _personRepository;
+    public PersonsService(IPersonsRepository personsRepository) { _personRepository = personsRepository; }
     public async Task<PersonResponse> AddPerson(PersonAddRequest? personAddRequest)
     {
         if (personAddRequest != null)
@@ -23,39 +19,44 @@ public class PersonsService : IPersonsService
 
             Person person = personAddRequest.ToPerson();
             person.PersonId = Guid.NewGuid();
-            // _db.Persons.Add(person);
-            // _db.SaveChanges();
-            int count = await _db.sp_AddPerson(person);       // when we want to add the data by using SP
-            if (count > 0)
-            {
-                PersonResponse personResponse = person.ToPersonResponse();
-                CountryResponse? countryResponse = await _countriesService?.GetCountryByCountryId(person.CountryId);
-                if (countryResponse != null)
-                    personResponse.Country = countryResponse.CountryName;
-                return personResponse;
-            }
-            else
-                return new PersonResponse();
+            await _personRepository.AddPerson(person);
+            return person.ToPersonResponse();
+            // int count = await _personRepository.sp_AddPerson(person);       // when we want to add the data by using SP
+            //     if (count > 0)
+            //     {
+            //         PersonResponse personResponse = person.ToPersonResponse();
+            //         CountryResponse? countryResponse = await _countriesService?.GetCountryByCountryId(person.CountryId);
+            //         if (countryResponse != null)
+            //             personResponse.Country = countryResponse.CountryName;
+            //         return personResponse;
+            //     }
+            //     else
+            //         return new PersonResponse();
+            // }
+            // else
+            //     return new PersonResponse();
         }
-        else
-            return new PersonResponse();
+        return new PersonResponse();
     }
     public async Task<List<PersonResponse>> GetAllPersons()
     {
-        // List<Person> personList = _db.Persons.Select(x => x).ToList();  
+        // List<Person> personList = _personRepository.Persons.Select(x => x).ToList();  
         // return personList.Select(x => x.ToPersonResponse()).ToList();
 
         // another way to implement this 
-        // return _db.Persons.ToList().Select(x => x.ToPersonResponse()).ToList();         // more optimized way is to convert first into array by using list() and then convert each row
-        List<Person> persons = await _db.sp_GetAllPersons();
-        return persons.Select(x => x.ToPersonResponse()).ToList();
+        // return _personRepository.Persons.ToList().Select(x => x.ToPersonResponse()).ToList();         // more optimized way is to convert first into array by using list() and then convert each row
+        // List<Person> persons = await _personRepository.sp_GetAllPersons();
+        // return persons.Select(x => x.ToPersonResponse()).ToList();
+        return (await _personRepository.GetAllPersons()).Select(x => x.ToPersonResponse()).ToList();
     }
     public async Task<PersonResponse> GetPersonByPersonId(Guid? personId)
     {
         if (string.IsNullOrEmpty(personId.ToString()))
             throw new ArgumentNullException("Must provide Person ID");
-        Person? personDetails = await _db.Persons.FirstOrDefaultAsync(x => x.PersonId == personId);
-        return personDetails == null ? throw new Exception() : personDetails.ToPersonResponse();
+        // Person? personDetails = await _personRepository.Persons.FirstOrDefaultAsync(x => x.PersonId == personId);
+        // return personDetails == null ? throw new Exception() : personDetails.ToPersonResponse();
+
+        return (await _personRepository.GetPersonByPersonId(personId.Value)).ToPersonResponse();
     }
     public async Task<List<PersonResponse>> GetFilteredPerson(string? propertyName, string? searchString)   // TO DO 
     {
@@ -106,7 +107,8 @@ public class PersonsService : IPersonsService
         if (personUpdateRequest == null) throw new ArgumentException(nameof(Person));
         ValidationHelper.ModelValidation(personUpdateRequest);
 
-        Person? matchingPerson = await _db.Persons.FirstOrDefaultAsync(x => x.PersonId == personUpdateRequest.PersonId);
+        // Person? matchingPerson = await _personRepository.Persons.FirstOrDefaultAsync(x => x.PersonId == personUpdateRequest.PersonId);
+        Person matchingPerson = await _personRepository.GetPersonByPersonId(personUpdateRequest.PersonId);
         if (matchingPerson == null)
             throw new ArgumentException("Give person ID doesn't match");
 
@@ -117,20 +119,19 @@ public class PersonsService : IPersonsService
         matchingPerson.Gender = personUpdateRequest.Gender.ToString();
         matchingPerson.CountryId = personUpdateRequest.CountryId;
         matchingPerson.ReveiveNewsLetters = personUpdateRequest.ReveiveNewsLetters;
-        await _db.SaveChangesAsync();
-
-        return matchingPerson.ToPersonResponse();
+        // await _personRepository.SaveChangesAsync();
+        // return matchingPerson.ToPersonResponse();
+        return (await _personRepository.UpdatePerson(matchingPerson)).ToPersonResponse();
     }
     public async Task<bool> DeletePerson(Guid personId)
     {
         if (string.IsNullOrEmpty(personId.ToString())) throw new ArgumentNullException("Person ID can not be empty");
 
-        Person? matchedPerson = await _db.Persons.FirstOrDefaultAsync(x => x.PersonId == personId);
-        if (matchedPerson == null) return false;
-
-        _db.Persons.Remove(await _db.Persons.FirstAsync(temp => temp.PersonId == matchedPerson.PersonId));
-        await _db.SaveChangesAsync();
-
-        return true;
+        // Person? matchedPerson = await _personRepository.Persons.FirstOrDefaultAsync(x => x.PersonId == personId);
+        return await _personRepository.DeletePerson(personId);
+        // if (matchedPerson == null) return false;
+        // _personRepository.Persons.Remove(await _personRepository.Persons.FirstAsync(temp => temp.PersonId == matchedPerson.PersonId));
+        // await _personRepository.SaveChangesAsync();
+        // return true;
     }
 }
