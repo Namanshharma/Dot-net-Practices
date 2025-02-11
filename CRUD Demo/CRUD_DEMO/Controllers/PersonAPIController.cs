@@ -9,10 +9,12 @@ namespace CRUD_DEMO.Controllers
     {
         private readonly ICountriesService _countriesService;
         private readonly IPersonsService _personsService;
-        public PersonAPIController(IPersonsService personsService, ICountriesService countriesService)
+        private readonly ILogger<PersonAPIController> _logger;
+        public PersonAPIController(IPersonsService personsService, ICountriesService countriesService, ILogger<PersonAPIController> logger)
         {
             _countriesService = countriesService;
             _personsService = personsService;
+            _logger = logger;
         }
         [HttpGet]
         [Route("/")]
@@ -20,6 +22,7 @@ namespace CRUD_DEMO.Controllers
         {
             try
             {
+                _logger.LogInformation("Reached At Get All persons Endpoint");
                 return await _personsService.GetAllPersons();
             }
             catch (Exception ex)
@@ -33,10 +36,17 @@ namespace CRUD_DEMO.Controllers
         {
             try
             {
+                _logger.LogInformation("Reached At Add Person Endpoint");
                 if (ModelState.IsValid)
+                {
+                    _logger.LogInformation("Payload of Add Person Endpoint", personAddRequest);
                     return await _personsService.AddPerson(personAddRequest);
+                }
                 else
+                {
+                    _logger.LogInformation("Payload is not valid");
                     return new PersonResponse();
+                }
             }
             catch (Exception ex)
             {

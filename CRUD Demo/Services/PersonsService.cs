@@ -1,6 +1,5 @@
 using System.Reflection;
 using Entities;
-using Microsoft.EntityFrameworkCore;
 using RepositoryContracts;
 using ServiceContracts;
 using ServiceContracts.DTO;

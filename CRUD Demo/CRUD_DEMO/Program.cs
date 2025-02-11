@@ -25,7 +25,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
 }
-
+app.UseHttpLogging();
 app.UseHsts();
 app.UseStaticFiles();
 app.UseRouting();
