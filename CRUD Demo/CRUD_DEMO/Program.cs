@@ -1,4 +1,5 @@
 using Entities;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Repositories;
 using RepositoryContracts;
@@ -19,6 +20,17 @@ builder.Services.AddDbContext<CRUDDbContext>(x =>
     x.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));   // specifing that in this we are using SQL server
 });                // by using this we are registering our DbContext ( Database ) in IOC container 
 
+builder.Services.AddCors(x =>
+{
+    x.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();              // here we have configured the CORD policy
+    });
+});
+
+// builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer();
+// builder.Services.AddRateLimiter(x => x.GlobalLimiter = 10);
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -28,6 +40,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpLogging();
 app.UseHsts();
 app.UseStaticFiles();
+app.UseCors();                                      // here we have added the CORS in our pipeline
 app.UseRouting();
 app.MapControllers();
 
