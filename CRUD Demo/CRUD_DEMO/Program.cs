@@ -1,5 +1,4 @@
 using Entities;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Repositories;
 using RepositoryContracts;

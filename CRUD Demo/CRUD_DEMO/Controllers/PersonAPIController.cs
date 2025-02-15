@@ -1,3 +1,4 @@
+using CRUD_DEMO.Filters.ActionFilters;
 using Microsoft.AspNetCore.Mvc;
 using ServiceContracts;
 using ServiceContracts.DTO;
@@ -18,6 +19,7 @@ namespace CRUD_DEMO.Controllers
         }
         [HttpGet]
         [Route("/")]
+        [TypeFilter(typeof(PersonListActionFilter))]            // by doing this we have added out Action filter 
         public async Task<List<PersonResponse>> GetAllPersons()
         {
             try
