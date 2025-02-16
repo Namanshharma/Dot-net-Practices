@@ -18,7 +18,7 @@
 
 // SOLID Principles
 // :- Single Responsibility principle = A class should do one thing and therefore it should have only a single reason to change
-// :- Open Close Principle = A class should be opne for extension but closed to modification
+// :- Open Close Principle = A class should be open for extension but closed to modification. That's why we have extension methods in c#
 // :- Liskov Substitution principle = Derived or child classes must be substitutable for their base or parent class
 // :- Interface Segregation Principle = Classes should not be forced to implement a function which they don't need
 // :- Dependency Inversion Principle = Hight level classes should not depend on low level classes. Both should depend upon Abstractions

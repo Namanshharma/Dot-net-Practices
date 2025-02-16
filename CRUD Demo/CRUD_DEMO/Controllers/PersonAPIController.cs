@@ -6,6 +6,8 @@ namespace CRUD_DEMO.Controllers
 {
     [Route("[controller]")]         // by default it create person/
     [ApiController]
+    [TypeFilter(typeof(PersonListActionFilter), Arguments = new object[] { "Key", "Value" })]
+    // in this way we can pass the arguments to Action Filter <<---- there are 3 different types of Filters like :- Controller Filters, Action method filters and Global Level Filters
     public class PersonAPIController : ControllerBase
     {
         private readonly ICountriesService _countriesService;
@@ -34,6 +36,7 @@ namespace CRUD_DEMO.Controllers
         }
         [HttpPost]
         [Route("[action]")]
+        [TypeFilter(typeof(PersonListActionFilter), Arguments = new object[] { "Key", "Value" })]                      // in this way we can pass the arguments to Action Filter
         public async Task<PersonResponse> AddPerson(PersonAddRequest? personAddRequest)
         {
             try
