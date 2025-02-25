@@ -1,3 +1,4 @@
+using CRUD_DEMO.Filters.ActionFilters;
 using Entities;
 using Microsoft.EntityFrameworkCore;
 using Repositories;
@@ -7,13 +8,21 @@ using Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllersWithViews();
-builder.Services.AddControllers();
+builder.Services.AddControllersWithViews(x => x.Filters.Add<PersonListActionFilter>()); // in this way we can declare the Global Level Filter
+builder.Services.AddControllers(x => x.Filters.Add<PersonListActionFilter>());          // in this way we can declare the Global Level Filter but by declaring Action Filter like this
+// we can not be able to pass the Arguments
+
+builder.Services.AddControllers(x =>
+{
+    var logger = builder.Services?.BuildServiceProvider().GetRequiredService<ILogger<PersonListActionFilter>>();
+    x.Filters.Add(new PersonListActionFilter(logger, "", ""));
+});
+
 builder.Services.AddScoped<IPersonsRepository, PersonsRepository>();
 builder.Services.AddScoped<ICountriesRepository, CountriesRepository>();
-
 builder.Services.AddScoped<IPersonsService, PersonsService>();
 builder.Services.AddScoped<ICountriesService, CountriesService>();
+
 builder.Services.AddDbContext<CRUDDbContext>(x =>
 {
     x.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));   // specifing that in this we are using SQL server
