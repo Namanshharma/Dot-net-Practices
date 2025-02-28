@@ -14,8 +14,9 @@ builder.Services.AddControllers(x => x.Filters.Add<PersonListActionFilter>());  
 
 builder.Services.AddControllers(x =>
 {
-    var logger = builder.Services?.BuildServiceProvider().GetRequiredService<ILogger<PersonListActionFilter>>();
-    x.Filters.Add(new PersonListActionFilter(logger, "", ""));
+    var logger = builder?.Services?.BuildServiceProvider()?.GetRequiredService<ILogger<PersonListActionFilter>>();
+    if (logger != null)
+        x.Filters.Add(new PersonListActionFilter(logger, "", ""));
 });
 
 builder.Services.AddScoped<IPersonsRepository, PersonsRepository>();

@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc.Filters;
 namespace CRUD_DEMO.Filters.ActionFilters;
-public class PersonListActionFilter : IActionFilter
+public class PersonListActionFilter : IActionFilter // Always inherit from INTERFACE
 {
     private readonly ILogger<PersonListActionFilter> _logger;
     private readonly string _key;
@@ -13,7 +13,7 @@ public class PersonListActionFilter : IActionFilter
     // It can change the result returned from Aciton method
     // it can throw exceptions to either return the exception to the exception filter or return the error response to the browser
     {
-        _logger.LogInformation("After the execution of Action Filter this OnActionExecuted method is called");
+        _logger.LogInformation("After the execution of Action Filter this OnActionExecuted method is called"); 
     }
     public void OnActionExecuting(ActionExecutingContext context)
     // in this method we can read the method parameters, check them and manipulate them as well

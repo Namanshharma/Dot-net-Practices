@@ -22,7 +22,7 @@ namespace CRUD_DEMO.Controllers
         }
         [HttpGet]
         [Route("/")]
-        [TypeFilter(typeof(PersonListActionFilter))]            // by doing this we have added out Action filter 
+        [TypeFilter(typeof(PersonListActionFilter))]   // by doing this we have added out Action filter 
         public async Task<List<PersonResponse>> GetAllPersons()
         {
             try
@@ -37,7 +37,7 @@ namespace CRUD_DEMO.Controllers
         }
         [HttpPost]
         [Route("[action]")]
-        [TypeFilter(typeof(PersonListActionFilter), Arguments = new object[] { "Key", "Value" })]                      // in this way we can pass the arguments to Action Filter
+        [TypeFilter(typeof(PersonListActionFilter), Arguments = new object[] { "Key", "Value" })]     // in this way we can pass the arguments to Action Filter
         public async Task<PersonResponse> AddPerson(PersonAddRequest? personAddRequest)
         {
             try
@@ -61,6 +61,7 @@ namespace CRUD_DEMO.Controllers
         }
         [HttpGet]
         [Route("[action]")]
+        [TypeFilter(typeof(PersonListActionFilter), Arguments = new object[] { "Custom Key 1", "Customer Value 1" })]
         public async Task<PersonResponse> GetPersonByPersonId(Guid? PersonId)
         {
             try
