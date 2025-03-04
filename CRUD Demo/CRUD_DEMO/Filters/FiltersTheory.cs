@@ -50,4 +50,16 @@
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // Resource Filter :- Inherit from IAsyncResourceFilter 
 
-// ---->> 
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// Authorization filter :- Runs before any other filter in the pipeline <<----- Must inherits from IAuthorization Filter or IAsyncAuthorizationFIlter
+
+// :- OnAuthorize method ---->> Determines whether the user is Authorized for the request
+//                      ---->> Short circuit the pipeline if the request is not Authorized
+//                      ---->> Don't throws exceptions on this method, as they will not be handle by Exception filters.
+
+// From HttpContext of this methods context we can get the Request Cookies and check the expected Key is present or not. If not then it means our User is not logged in so we dont want
+// him to use the resources of our application. Then in that case we short circuit the reqest from here.
+
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// Exception Filter :- Runs when any exception is raised during the filter pipeline.    <<---- Inherits from IAsyncExceptionFilter and it contains only single method
+// Exception handling middleware is better choice than this becuase that is having more broader scope than this Exception filter
