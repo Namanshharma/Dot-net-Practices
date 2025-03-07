@@ -1,4 +1,5 @@
 using CRUD_DEMO.Filters.ActionFilters;
+using CRUD_DEMO.Middlewares;
 using Entities;
 using Microsoft.EntityFrameworkCore;
 using Repositories;
@@ -43,9 +44,13 @@ builder.Services.AddCors(x =>
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
-{
     app.UseDeveloperExceptionPage();
+else
+{
+    app.UseExceptionHandler();                      // it is a build in Exception handler and it 
+    app.UseMiddleware<ExceptionHandlingMiddleware>();
 }
+
 app.UseHttpLogging();
 app.UseHsts();
 app.UseStaticFiles();

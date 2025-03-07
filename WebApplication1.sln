@@ -33,6 +33,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryContracts", "CRUD
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repositories", "CRUD Demo\Repositories\Repositories.csproj", "{0C3F9FDE-DF8A-4189-9C71-E3752B8870CE}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CitiesManager", "CitiesManager", "{A843345B-4E55-0802-A56D-AA4667A383D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CitiesManager.WebAPI", "CitiesManager\CitiesManager.WebAPI\CitiesManager.WebAPI.csproj", "{1DA48882-7839-49BF-8853-8BB93CB18588}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +91,10 @@ Global
 		{0C3F9FDE-DF8A-4189-9C71-E3752B8870CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0C3F9FDE-DF8A-4189-9C71-E3752B8870CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0C3F9FDE-DF8A-4189-9C71-E3752B8870CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1DA48882-7839-49BF-8853-8BB93CB18588}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DA48882-7839-49BF-8853-8BB93CB18588}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DA48882-7839-49BF-8853-8BB93CB18588}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DA48882-7839-49BF-8853-8BB93CB18588}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -103,5 +111,6 @@ Global
 		{ACE9F973-BC22-4218-964E-AB90F607FA43} = {80320AD7-3BB4-C066-1126-1702D6F24252}
 		{40E3906A-04AC-4B95-96E1-C4E0D1AC2E74} = {80320AD7-3BB4-C066-1126-1702D6F24252}
 		{0C3F9FDE-DF8A-4189-9C71-E3752B8870CE} = {80320AD7-3BB4-C066-1126-1702D6F24252}
+		{1DA48882-7839-49BF-8853-8BB93CB18588} = {A843345B-4E55-0802-A56D-AA4667A383D4}
 	EndGlobalSection
 EndGlobal
