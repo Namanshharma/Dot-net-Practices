@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using ServiceContracts;
-using ServiceContracts.DTO;
 namespace CRUD_DEMO.Controllers
 {
     public class PersonController : Controller

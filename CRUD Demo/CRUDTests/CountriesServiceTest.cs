@@ -1,6 +1,3 @@
-using ServiceContracts;
-using Services;
-
 namespace CRUDTests;
 
 public class CountriesServiceTest
