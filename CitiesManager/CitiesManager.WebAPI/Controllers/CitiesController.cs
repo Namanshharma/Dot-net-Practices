@@ -1,3 +1,4 @@
+using System.Data;
 using CitiesManager.WebAPI.DatabaseContext;
 using CitiesManager.WebAPI.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -23,7 +24,31 @@ namespace CitiesManager.WebAPI.Controllers
                 return NotFound();
             return city;
         }
-            [HttpPut("{id}")]
-        public async Task<IActionResult> PutCity(Guid id, City city) { }
+        [HttpPut("{cityId}")]
+        public async Task<IActionResult> PutCity(Guid cityId, City city)
+        {
+            if (cityId != city.CityId)
+                return BadRequest();
+            var existingCity = await _applicationDBContext.Cities.FindAsync(cityId);
+            if (existingCity == null) return NotFound();
+            existingCity.CityName = city.CityName;
+            try
+            {
+                await _applicationDBContext.SaveChangesAsync();
+            }
+            catch (DBConcurrencyException)
+            {
+                throw;
+            }
+            return NoContent();
+        }
+        [HttpPost]
+        public async Task<ActionResult<City>> PostCity(City city)
+        {
+            if (_applicationDBContext.Cities == null) return Problem("Cities Entity is null");
+            _applicationDBContext.Cities.Add(city);
+            await _applicationDBContext.SaveChangesAsync();
+            return CreatedAtAction("GetCity", new { cityId = city.CityId }, city);
+        }
     }
 }
